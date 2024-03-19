@@ -1,3 +1,7 @@
 # spark-quick-start
 
-a quick start for deploying emr on eks
+## create a cluster
+./install.sh
+
+## destroy a cluster
+terraform destroy
