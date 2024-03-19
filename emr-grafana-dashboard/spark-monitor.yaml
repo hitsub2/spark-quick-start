@@ -1,0 +1,42 @@
+ apiVersion: monitoring.coreos.com/v1
+ kind: PodMonitor
+ metadata:
+   name: spark-driver-metrics
+   labels:
+     prometheus: k8s
+     app.kubernetes.io/part-of: kube-prometheus
+     app.kubernetes.io/name: prometheus
+     release: kube-prometheus-stack
+   namespace: [${namesapce}]
+ spec:
+    selector:
+       matchLabels:
+         spark-role: driver
+    namespaceSelector:
+       matchNames:
+          - [${namesapce}]
+    podMetricsEndpoints:
+    - port: spark-ui
+      interval: 10s
+      path: /metrics/driver/prometheus/
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+namespace: [${namesapce}]
+metadata:
+  labels:
+     prometheus: k8s
+     app.kubernetes.io/part-of: kube-prometheus
+     app.kubernetes.io/name: prometheus
+     release: kube-prometheus-stack
+  name: spark-service-monitoring
+spec:
+  namespaceSelector:
+    matchNames: [${namesapce}]
+  endpoints:
+    - port: "spark-ui"
+      path: /metrics/driver/prometheus/
+  selector:
+    matchLabels:
+      spark-role: driver
+      emr-containers.amazonaws.com/resource.type: job.run

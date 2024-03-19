@@ -1,0 +1,6 @@
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+spark-quick-start.code-workspace
+terraform.tfstate.backup
+terraform*
