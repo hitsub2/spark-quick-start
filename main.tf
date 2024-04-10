@@ -191,7 +191,7 @@ module "eks" {
 }
 
 resource "aws_ec2_tag" "cluster_primary_security_group"{
-  for_each = { for k, v in merge(var.tags, locals.karpenter_node_sg_tags) :
+  for_each = { for k, v in merge(var.tags, local.karpenter_node_sg_tags) :
     k => v if var.create && k != "Name" && var.create_cluster_primary_security_group_tags && v != null
 }
 

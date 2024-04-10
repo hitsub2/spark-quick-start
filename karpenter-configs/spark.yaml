@@ -66,7 +66,7 @@ spec:
 apiVersion: karpenter.k8s.aws/v1beta1
 kind: EC2NodeClass # Previously kind: AWSNodeTemplate
 metadata:
-  name: ${karpenter_pool_name}
+  name: default
   namespace: karpenter
 spec:
   amiFamily: AL2

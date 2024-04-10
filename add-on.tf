@@ -100,7 +100,7 @@ module "eks_blueprints_addons" {
 data "kubectl_path_documents" "spark_monitor" {
   pattern = "${path.module}/emr-grafana-dashboard/spark-monitor.yaml"
     vars = {
-    namesapce = var.emr-namespace
+    namespace = var.emr-namespace
 
   }
 }
