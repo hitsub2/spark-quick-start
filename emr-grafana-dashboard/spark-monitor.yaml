@@ -19,7 +19,22 @@ spec:
   podMetricsEndpoints:
     - port: spark-ui
       interval: 10s
-      path: /metrics/driver/prometheus/
+      path: /metrics/executors/prometheus/
+      relabelings:
+      - action: replace
+        regex: (.*)
+        replacement: $1
+        separator: ;
+        sourceLabels:
+        - __meta_kubernetes_pod_label_emr_containers_amazonaws_com_job_id
+        targetLabel: emr_containers_amazonaws_com_job_id
+      - action: replace
+        regex: (.*)
+        replacement: $1
+        separator: ;
+        sourceLabels:
+        - __meta_kubernetes_pod_label_emr_containers_amazonaws_com_virtual_cluster_id
+        targetLabel: cluster_arn
 
 ---
 apiVersion: monitoring.coreos.com/v1
