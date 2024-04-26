@@ -34,7 +34,7 @@ spec:
         separator: ;
         sourceLabels:
         - __meta_kubernetes_pod_label_emr_containers_amazonaws_com_virtual_cluster_id
-        targetLabel: cluster_arn
+        targetLabel: emr_containers_amazonaws_com_virtual_cluster_id
 
 ---
 apiVersion: monitoring.coreos.com/v1
